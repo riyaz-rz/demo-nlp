@@ -1,0 +1,178 @@
+Traceback (most recent call last):
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/connection.py", line 741, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+        sock=sock,
+    ...<14 lines>...
+        assert_fingerprint=self.assert_fingerprint,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/connection.py", line 920, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+        sock=sock,
+    ...<8 lines>...
+        tls_in_tls=tls_in_tls,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/util/ssl_.py", line 460, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/util/ssl_.py", line 504, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /EleutherAI/gpt-neox-20b/resolve/main/tokenizer_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ariyazahamed/Library/CloudStorage/OneDrive-athenahealth/Documents/nlp_demo/nlp-demo-app/backend/scripts/train_model.py", line 7, in <module>
+    tokenizer = GPTNeoXTokenizerFast.from_pretrained(model_name)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1971, in from_pretrained
+    resolved_config_file = cached_file(
+        pretrained_model_name_or_path,
+    ...<13 lines>...
+        _commit_hash=commit_hash,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/transformers/utils/hub.py", line 342, in cached_file
+    resolved_file = hf_hub_download(
+        path_or_repo_id,
+    ...<10 lines>...
+        local_files_only=local_files_only,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 862, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+        # Destination
+    ...<14 lines>...
+        force_download=force_download,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 925, in _hf_hub_download_to_cache_dir
+    (url_to_download, etag, commit_hash, expected_size, head_call_error) = _get_metadata_or_catch_error(
+                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        repo_id=repo_id,
+        ^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        relative_filename=relative_filename,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 1376, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+        url=url, proxies=proxies, timeout=etag_timeout, headers=headers, token=token
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 1296, in get_hf_file_metadata
+    r = _request_wrapper(
+        method="HEAD",
+    ...<5 lines>...
+        timeout=timeout,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 280, in _request_wrapper
+    response = _request_wrapper(
+        method=method,
+    ...<2 lines>...
+        **params,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 303, in _request_wrapper
+    response = get_session().request(method=method, url=url, **params)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/utils/_http.py", line 96, in send
+    return super().send(request, *args, **kwargs)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/requests/adapters.py", line 698, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: (MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /EleutherAI/gpt-neox-20b/resolve/main/tokenizer_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)')))"), '(Request ID: 945cd062-8e1d-4426-84b0-6d567fed61bd)')
+(transformers) ariyazahamed@ATH-6V47CQ76 backend % pipx inject transformers certifi
+⚠️ certifi already seems to be injected in 'transformers'. Not modifying existing installation in '/Users/ariyazahamed/.local/pipx/venvs/transformers'. Pass
+'--force' to force installation.
+(transformers) ariyazahamed@ATH-6V47CQ76 backend % python scripts/train_model.py   
+/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/transformers/tokenization_utils_base.py:1915: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/ariyazahamed/Library/CloudStorage/OneDrive-athenahealth/Documents/nlp_demo/nlp-demo-app/backend/scripts/train_model.py", line 7, in <module>
+    tokenizer = GPTNeoXTokenizerFast.from_pretrained(model_name, use_auth_token=True, trust_remote_code=True, proxies={'https': certifi.where()})
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1971, in from_pretrained
+    resolved_config_file = cached_file(
+        pretrained_model_name_or_path,
+    ...<13 lines>...
+        _commit_hash=commit_hash,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/transformers/utils/hub.py", line 342, in cached_file
+    resolved_file = hf_hub_download(
+        path_or_repo_id,
+    ...<10 lines>...
+        local_files_only=local_files_only,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 824, in hf_hub_download
+    hf_headers = build_hf_headers(
+        token=token,
+    ...<3 lines>...
+        headers=headers,
+    )
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/utils/_deprecation.py", line 101, in inner_f
+    return f(*args, **kwargs)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/utils/_headers.py", line 126, in build_hf_headers
+    token_to_send = get_token_to_send(token)
+  File "/Users/ariyazahamed/.local/pipx/venvs/transformers/lib/python3.13/site-packages/huggingface_hub/utils/_headers.py", line 159, in get_token_to_send
+    raise LocalTokenNotFoundError(
+    ...<4 lines>...
+    )
+huggingface_hub.errors.LocalTokenNotFoundError: Token is required (`token=True`), but no token found. You need to provide a token or be logged in to Hugging Face with `huggingface-cli login` or `huggingface_hub.login`. See https://huggingface.co/settings/tokens.
