@@ -1,0 +1,6 @@
+postgresql:
+  host: localhost
+  database: test
+  user: wmfuser
+  password: pwd
+  port: 5432
