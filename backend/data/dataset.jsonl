@@ -1,0 +1,10 @@
+[
+    {
+        "prompt": "Show me the employee list",
+        "completion": "select e.name from employee e"
+    },
+    {
+        "prompt": "Show me the list of organization",
+        "completion": "select o.name from organization o"
+    }
+]
